@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from theproviderssolutions.com/public/portfolioviewpage/2yeb3qK69rY4BHzSNg4V4yn9UyP5fnGLday & night mode in Bootstrap & Jquery.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Apr 2023 12:08:53 GMT -->
+<head>
+    <title>Light & Dark Themes on Toggle</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="../../../maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="../../../ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="../../../maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<script src="https://kit.fontawesome.com/493485e94e.js" crossorigin="anonymous"></script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600&display=swap');
+
+*{
+font-family: 'Nunito', sans-serif;
+margin:0; padding:0;
+box-sizing: border-box;
+outline: none; border:none;
+text-decoration: none;
+transition: all .2s linear;
+text-transform: capitalize;
+}
+
+html{
+font-size: 62.5%;
+overflow-x: hidden;
+}
+
+body{
+background: #eee;
+}
+
+.container{
+max-width: 1200px;
+margin: 0 auto;
+padding:3rem 2rem;
+}
+
+.container .title{
+font-size: 3.5rem;
+color:#444;
+margin-bottom: 3rem;
+text-transform: uppercase;
+text-align: center;
+}
+
+.container .products-container{
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+gap:2rem;
+}
+
+.container .products-container .product{
+text-align: center;
+padding:3rem 2rem;
+background: #fff;
+box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+outline: .1rem solid #ccc;
+outline-offset: -1.5rem;
+cursor: pointer;
+border-radius: 100px;
+}
+
+.container .products-container .product:hover{
+outline: .2rem solid #222;
+outline-offset: 0;
+}
+
+.container .products-container .product img{
+height: 25rem;
+}
+
+.container .products-container .product:hover img{
+transform: scale(.9);
+
+}
+
+.container .products-container .product h3{
+padding:.5rem 0;
+font-size: 2rem;
+color:#444;
+}
+
+.container .products-container .product:hover h3{
+color:#27ae60;
+}
+
+.container .products-container .product .price{
+font-size: 2rem;
+color:#444;
+}
+
+.products-preview{
+position: fixed;
+top:0; left:0;
+min-height: 100vh;
+width: 100%;
+background: rgba(0,0,0,.8);
+display: none;
+align-items: center;
+justify-content: center;
+
+}
+
+.products-preview .preview{
+display: none;
+padding:2rem;
+text-align: center;
+background: #fff;
+position: relative;
+margin:2rem;
+width: 40rem;
+border-radius: 20px;
+}
+
+.products-preview .preview.active{
+display: inline-block;
+}
+
+.products-preview .preview img{
+height: 30rem;
+}
+
+.products-preview .preview .fa-times{
+position: absolute;
+top:1rem; right:1.5rem;
+cursor: pointer;
+color:#444;
+font-size: 4rem;
+}
+
+.products-preview .preview .fa-times:hover{
+transform: rotate(90deg);
+}
+
+.products-preview .preview h3{
+color:#444;
+padding:.5rem 0;
+font-size: 2.5rem;
+}
+
+.products-preview .preview .stars{
+padding:1rem 0;
+font-size: 1.7rem;
+}
+
+.products-preview .preview .stars i{
+color:#27ae60;
+}
+
+.products-preview .preview .stars span{
+color:#999;
+}
+
+.products-preview .preview p{
+line-height: 1.5;
+padding:1rem 0;
+font-size: 1.6rem;
+color:#777;
+}
+
+.products-preview .preview .price{
+padding:1rem 0;
+font-size: 2.5rem;
+color:#27ae60;
+}
+
+.products-preview .preview .buttons{
+display: flex;
+gap:1.5rem;
+flex-wrap: wrap;
+margin-top: 1rem;
+}
+
+.products-preview .preview .buttons a{
+flex:1 1 16rem;
+padding:1rem;
+font-size: 1.8rem;
+color:#444;
+border:.1rem solid #444;
+}
+
+.products-preview .preview .buttons a.cart{
+background: #444;
+color:#fff;
+}
+
+.products-preview .preview .buttons a.cart:hover{
+background: #111;
+}
+
+.products-preview .preview .buttons a.buy:hover{
+background: #444;
+color:#fff;
+}
+
+
+@media (max-width:991px){
+
+html{
+  font-size: 55%;
+}
+
+}
+
+@media (max-width:768px){
+
+.products-preview .preview .images{
+  height: 25rem;
+}
+
+}
+
+@media (max-width:450px){
+
+html{
+  font-size: 50%;
+}
+
+}
+
+
+.sidebar{
+position: fixed;
+top: 0;
+left: 0;
+height: 100vh;
+width: 250px;
+padding: 10px 14px;
+background: #242526;
+transition: all 0.23s ease;
+z-index: 100; 
+cursor: pointer; 
+}
+.sidebar.close{
+width: 88px;
+}
+header{
+height: 100px;
+margin-top: 5em;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+header img{
+width: 80px;
+justify-content: center;
+align-items: center;
+transition: all 0.23s ease;
+}
+.sidebar.close img{
+width: 30px;
+}
+.sidebar .toggle{
+position: absolute;
+top: 5%;
+right: 30px;
+height: 25px;
+width: 25px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 26px;
+cursor: pointer;
+transition: all 0.23s ease;
+color: #fff;
+}
+.menu li{
+height: 50px;
+list-style: none;
+display: flex;
+align-items: center;
+margin-top: 10px;
+}
+.menu li i{
+min-width: 60px;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 18px;
+transition: all 0.23s ease;
+color: #ccc;
+}
+li span{
+font-size: 16px;
+font-weight: 500;
+white-space: nowrap;
+opacity: 1;
+transition: .23s;
+color: #ccc;
+}
+.sidebar.close .text{
+opacity: 0;
+}
+.sidebar .menu{
+margin-top: 20px;
+}
+li.search-box{
+border-radius: 6px;
+background-color: #3a3b3c;
+cursor: pointer;
+transition: all 0.23s ease;
+}
+li.search-box input{
+height: 100%;
+width: 100%;
+outline: none;
+border: none;
+background-color: #3a3b3c;
+color: #ccc;
+border-radius: 6px;
+font-size: 17px;
+font-weight: 500;
+transition: all 0.23s ease;
+}
+li a{
+list-style: none;
+height: 100%;
+background-color: transparent;
+display: flex;
+align-items: center;
+height: 100%;
+width: 100%;
+border-radius: 6px;
+text-decoration: none;
+transition: all 0.23s ease;
+}
+li a:hover{
+background-color: #fff;
+}
+li a:hover .icon,
+li a:hover .text{
+color: #242526;
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+  <!-- <nav class="navbar navbar-expand-sm navbar-light bg-light" style="margin-left: 90px;">
+    <a class="navbar-brand font-weight-bold" href="#">The One Store</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapseNavbarid"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapseNavbarid">
+      <ul class="navbar-nav mr-auto mt-2 w-50 d-flex justify-content-around">
+        <li class="nav-item active">
+          <a class="nav-link font-weight-bold" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link font-weight-bold" href="#">Catecories</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold" href="#">abo alawi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold" href="#">About Us</a>
+        </li>
+      </ul> -->
+
+
+    <div  class="custom-control custom-switch mr-5">
+      <input type="checkbox" class="custom-control-input" id="selector">
+      <label class="custom-control-label" for="selector" style="margin-left: 93%; font-size: large;" >Dark Mode</label>
+    </div>
+
+
+  <script>
+  $(document).ready(function() {
+    // Add event listener to the switch
+    $('#selector').on('change', function() {
+      // Check the state of the switch
+      if ($(this).is(':checked')) {
+        // If it's checked, change the label text to "Light Mode"
+        $('.custom-control-label').text('Light Mode');
+      } else  {
+        // If it's unchecked, change the label text back to "Dark Mode"
+        $('.custom-control-label').text('Dark Mode');
+      }
+    });
+  });
+  </script>
+    
+      <input type="text" style="margin-left: 89%; background-color: red; border-radius: 8px; border: solid;" placeholder="Search..">
+      <button type="submit">  dont touch  </button>
+    
+
+    </div>
+  </nav>
+
+<script>
+
+   $(document).ready(function(){
+      $("#selector").change(function(){
+        $("body").toggleClass("bg-secondary");
+        $("nav").toggleClass("navbar-dark bg-dark");
+        $(".custom-control-label").toggleClass("text-white");
+        $("h1").toggleClass("text-white");
+        $("h5").toggleClass("text-white");
+      });
+   });
+</script>
+
+
+  
+<div class="container">
+
+  <h3 class="title">The One Store</h3>
+
+  <div class="products-container">
+
+     <div class="product" data-name="p-1">
+        <img src="images/1.jpg" alt="">
+        <h3>Galaxy Buds2 Pro</h3>
+        <div class="price">$999</div>
+     </div>
+
+     <div class="product" data-name="p-2">
+        <img src="images/3.jpg" alt="">
+        <h3>T900 Pro Max</h3>
+        <div class="price">$999</div>
+     </div>
+
+     <div class="product" data-name="p-3">
+        <img src="images/4.jpg" alt="">
+        <h3>AJ</h3>
+        <div class="price">$999.99</div>
+     </div>
+
+     <div class="product" data-name="p-4">
+        <img src="images/5.jpg" alt="">
+        <h3>gg</h3>
+        <div class="price">$999.99</div>
+     </div>
+
+     <div class="product" data-name="p-5">
+        <img src="images/8.jpg" alt="">
+        <h3></h3>
+        <div class="price">$ </div>
+     </div>
+
+     <div class="product" data-name="p-6">
+        <img src="images/11.jpg" alt="">
+        <h3>lala</h3>
+        <div class="price">$999.99</div>
+     </div>
+
+  </div>
+
+</div>
+
+<div class="products-preview">
+
+  <div class="preview" data-target="p-1">
+     <i class="fas fa-times"></i>
+     <img src="images/1.jpg" alt="">
+     <h3>Galaxy Buds2 Pro</h3>
+     <div class="stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+        <span>( 0 )</span>
+     </div>
+     <p>Samsung Galaxy Buds2 Pro</p>
+     <div class="price">$198</div>
+     <div class="buttons">
+        <a href="https://www.facebook.com/The0neStore1" class="buy">buy now</a>
+        <a href="https://www.facebook.com/The0neStore1" class="cart">add to cart</a>
+     </div>
+  </div>
+
+  <div class="preview" data-target="p-2">
+     <i class="fas fa-times"></i>
+     <img src="images/10.jpg" alt="">
+     <h3>Apple Watch T900 Pro Max</h3>
+     <div class="stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+        <span>( 0 )</span>
+     </div>
+     <p>russian stuff</p>
+     <div class="price">$288.00</div>
+     <div class="buttons">
+        <a href="https://www.facebook.com/The0neStore1" class="buy">buy now</a>
+        <a href="https://www.facebook.com/The0neStore1" class="cart">add to cart</a>
+     </div>
+  </div>
+
+  <div class="preview" data-target="p-3">
+     <i class="fas fa-times"></i>
+     <img src="images/7.jpg" alt="">
+     <h3>@-@</h3>
+     <div class="stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+        <span>( 0 )</span>
+     </div>
+     <p>very good girl with nice smell and hair, good in bed and she can cook</p>
+     <div class="price">$99999999.97</div>
+     <div class="buttons">
+        <a href="https://www.facebook.com/The0neStore1" class="buy">buy now</a>
+        <a href="https://www.facebook.com/The0neStore1" class="cart">add to cart</a>
+     </div>
+  </div>
+
+  <div class="preview" data-target="p-4">
+     <i class="fas fa-times"></i>
+     <img src="images/6.jpg" alt="">
+     <h3></h3>
+     <div class="stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+        <span>( 0 )</span>
+     </div>
+     <p>   </p>
+     <div class="price">$288.00</div>
+     <div class="buttons">
+        <a href="https://www.facebook.com/The0neStore1" class="buy">buy now</a>
+        <a href="https://www.facebook.com/The0neStore1" class="cart">add to cart</a>
+     </div>
+  </div>
+
+  <div class="preview" data-target="p-5">
+     <i class="fas fa-times"></i>
+     <img src="images/12.jpg" alt="">
+     <h3></h3>
+     <div class="stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+        <span>( 0 )</span>
+     </div>
+     <p>   </p>
+     <div class="price">$99</div>
+     <div class="buttons">
+        <a href="https://www.facebook.com/The0neStore1" class="buy">buy now</a>
+        <a href="https://www.facebook.com/The0neStore1" class="cart">add to cart</a>
+     </div>
+  </div>
+
+  <div class="preview" data-target="p-6">
+     <i class="fas fa-times"></i>
+     <img src="images/11.jpg" alt="">
+     <h3></h3>
+     <div class="stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+        <span>( 0 )</span>
+     </div>
+     <p> </p>
+     <div class="price">$</div>
+     <div class="buttons">
+        <a href="https://www.facebook.com/The0neStore1" class="buy"> buy now </a>
+        <a href="https://www.facebook.com/The0neStore1" class="cart">add to cart</a>
+     </div>
+  </div>
+
+</div>
+<nav class="sidebar close">
+  <header>
+      
+      <i class="fa-solid fa-bars toggle"></i>
+  </header>
+  
+      <ul class="menu">
+          <li class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" placeholder="Search...">
+          </li>
+
+          <li class="nav-link">
+              <a href="index.html">
+                  <i class="fa-solid fa-house icon"></i>
+                  <span class="text">Home</span>
+              </a>
+          </li>
+
+          <li class="nav-link">
+              <a href="categories.html">
+                  <i class="fa-solid fa-book"></i>
+                  <span class="text">categories</span>
+              </a>
+          </li>
+
+          <li class="nav-link">
+              <a href="#">
+                  <i class="fa-regular fa-folder-open"></i>
+                  <span class="text">g</span>
+              </a>
+          </li>
+
+          <li class="nav-link">
+              <a href="#">
+                  <i class="fa-solid fa-sheet-plastic"></i>
+                  <span class="text">s</span>
+              </a>
+          </li>
+
+          <li class="nav-link">
+              <a href="#">
+                  <i class="fa-regular fa-address-card"></i>
+                  <span class="text">About Us</span>
+              </a>
+          </li>
+      </ul>
+</nav>
+
+<script>
+
+let preveiwContainer = document.querySelector('.products-preview');
+let previewBox = preveiwContainer.querySelectorAll('.preview');
+
+document.querySelectorAll('.products-container .product').forEach(product =>{
+ product.onclick = () =>{
+   preveiwContainer.style.display = 'flex';
+   let name = product.getAttribute('data-name');
+   previewBox.forEach(preview =>{
+     let target = preview.getAttribute('data-target');
+     if(name == target){
+       preview.classList.add('active');
+     }
+   });
+ };
+});
+
+previewBox.forEach(close =>{
+ close.querySelector('.fa-times').onclick = () =>{
+   close.classList.remove('active');
+   preveiwContainer.style.display = 'none';
+ };
+});
+
+const body = document.querySelector('body');
+sidebar = body.querySelector('nav');
+toggle = body.querySelector(".toggle");
+
+toggle.addEventListener("click", () => {
+ sidebar.classList.toggle("close");
+});
+document.addEventListener("click", (event) => {
+ // Close the sidebar when clicking outside of it and toggle button
+ if (!sidebar.contains(event.target) && event.target !== toggle) {
+   sidebar.classList.add("close");
+ }
+});
+
+</script>
+
+
+
+
+
+
+</body>
+
+</html>
